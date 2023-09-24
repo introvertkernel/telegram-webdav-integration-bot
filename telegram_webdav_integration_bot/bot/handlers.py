@@ -76,7 +76,7 @@ def update_handler(update: Update, _: CallbackContext):
 
     handler_log.info(f"Uploading file {filename} to WebDAV...")
     try:
-        res = requests.put(url, raw_attachment, auth=webdav_auth)
+        res = requests.put(url, raw_attachment, auth=webdav_auth, verify=False)
         res.raise_for_status()
     except (requests.exceptions.RequestException, requests.exceptions.HTTPError) as e:
         handler_log.exception(f"Error during the upload of {filename} to WebDAV")
