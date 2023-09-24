@@ -8,7 +8,7 @@ RUN apt update && apt install -y gcc python3-cffi libffi-dev musl-dev openssl li
     apt remove -y gcc libffi-dev musl-dev libssl-dev
 
 # Download and install cloudflared
-# RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
+RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
     chmod +x /usr/local/bin/cloudflared
 
 # COPY init_cloudflared.sh /etc/init.d/cloudflared
@@ -19,11 +19,19 @@ RUN apt update && apt install -y gcc python3-cffi libffi-dev musl-dev openssl li
 
 # RUN rc-update add cloudflared default
 
+ARG ARG_TUNNEL_ID
+ENV TUNNEL_ID $ARG_TUNNEL_ID
+COPY cloudflared-config.yml config.yml
+RUN sed -i "s/TUUID/$TUNNEL_ID/g" config.yml
+COPY config.yml ~/.cloudflared
+COPY config.yml /etc/cloudflared/config.yml
+
+
 # Verify the installation
-# RUN cloudflared --version
-# ARG ARG_CLOUDFLARED_TOKEN
-# ENV CLOUDFLARED_TOKEN $ARG_CLOUDFLARED_TOKEN
-# RUN cloudflared service install $CLOUDFLARED_TOKEN
+RUN cloudflared --version
+ARG ARG_CLOUDFLARED_TOKEN
+ENV CLOUDFLARED_TOKEN $ARG_CLOUDFLARED_TOKEN
+RUN cloudflared service install $CLOUDFLARED_TOKEN
 
 ENV TELEGRAM_BOT_TOKEN ""
 ENV TELEGRAM_BOT_CHAT_IDS ""
