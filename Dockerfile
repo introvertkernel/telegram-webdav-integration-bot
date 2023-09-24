@@ -8,8 +8,7 @@ RUN apt update && apt install -y gcc python3-cffi libffi-dev musl-dev openssl li
     apt remove -y gcc libffi-dev musl-dev libssl-dev
 
 # Download and install cloudflared
-# RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
-    # chmod +x /usr/local/bin/cloudflared
+# RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && chmod +x /usr/local/bin/cloudflared
 
 # COPY init_cloudflared.sh /etc/init.d/cloudflared
 # RUN chmod +x /etc/init.d/cloudflared
