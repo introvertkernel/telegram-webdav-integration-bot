@@ -2,7 +2,7 @@ import logging
 from urllib.parse import urljoin
 
 import requests
-from telegram import Document, Update, Video
+from telegram import Document, Update, Video, Audio
 from telegram.ext import CallbackContext
 
 from telegram_webdav_integration_bot.bot.utils import UploadAttachment
