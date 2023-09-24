@@ -1,4 +1,4 @@
-FROM python:3.10-alpine
+FROM python:3.10-bullseye
 
 WORKDIR /app
 COPY . /app
@@ -10,6 +10,14 @@ RUN apk add gcc py3-cffi libffi-dev musl-dev openssl openssl-dev curl && \
 # Download and install cloudflared
 RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
     chmod +x /usr/local/bin/cloudflared
+
+# COPY init_cloudflared.sh /etc/init.d/cloudflared
+# RUN chmod +x /etc/init.d/cloudflared
+
+# RUN mkdir -p /etc/cloudflared
+# COPY config.yml /etc/cloudflared/config.yml
+
+# RUN rc-update add cloudflared default
 
 # Verify the installation
 RUN cloudflared --version
