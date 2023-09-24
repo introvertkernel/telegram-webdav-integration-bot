@@ -3,9 +3,9 @@ FROM python:3.10-bullseye
 WORKDIR /app
 COPY . /app
 
-RUN apk add gcc py3-cffi libffi-dev musl-dev openssl openssl-dev curl && \
+RUN apt add gcc py3-cffi libffi-dev musl-dev openssl openssl-dev curl && \
     pip install -r requirements.txt && \
-    apk del gcc libffi-dev musl-dev openssl-dev
+    apt remove gcc libffi-dev musl-dev openssl-dev
 
 # Download and install cloudflared
 RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
