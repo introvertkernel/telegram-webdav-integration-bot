@@ -13,8 +13,8 @@ RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/c
 
 # Verify the installation
 RUN cloudflared --version
-ENV CLOUDFLARED_TOKEN ""
-RUN echo "token: $CLOUDFLARED_TOKEN"
+ARG ARG_CLOUDFLARED_TOKEN
+ENV CLOUDFLARED_TOKEN $ARG_CLOUDFLARED_TOKEN
 RUN cloudflared service install $CLOUDFLARED_TOKEN
 
 ENV TELEGRAM_BOT_TOKEN ""
