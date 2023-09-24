@@ -21,10 +21,10 @@ RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/c
 
 ARG ARG_TUNNEL_ID
 ENV TUNNEL_ID $ARG_TUNNEL_ID
-COPY cloudflared-config.yml config.yml
-RUN sed -i "s/TUUID/$TUNNEL_ID/g" config.yml
-COPY config.yml ~/.cloudflared
-COPY config.yml /etc/cloudflared/config.yml
+COPY /app/cloudflared-config.yml /app/config.yml
+RUN sed -i "s/TUUID/$TUNNEL_ID/g" /app/config.yml
+COPY /app/config.yml ~/.cloudflared
+COPY /app/config.yml /etc/cloudflared/config.yml
 
 
 # Verify the installation
