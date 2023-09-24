@@ -57,7 +57,7 @@ def update_handler(update: Update, _: CallbackContext):
             key=lambda x: int(x.file_size or 0),
             reverse=True,
         )[0]
-    elif isinstance(message.effective_attachment, (Document, Video)):
+    elif isinstance(message.effective_attachment, (Document, Video, Audio)):
         attachment = message.effective_attachment
     else:
         handler_log.warning(
