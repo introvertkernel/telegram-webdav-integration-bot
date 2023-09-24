@@ -5,7 +5,7 @@ COPY . /app
 
 RUN apt update && apt install -y gcc python3-cffi libffi-dev musl-dev openssl libssl-dev curl && \
     pip install -r requirements.txt && \
-    apt remove gcc libffi-dev musl-dev libssl-dev
+    apt remove -y gcc libffi-dev musl-dev libssl-dev
 
 # Download and install cloudflared
 RUN curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o /usr/local/bin/cloudflared && \
