@@ -3,7 +3,7 @@ FROM python:3.10-bullseye
 WORKDIR /app
 COPY . /app
 
-RUN apt install gcc py3-cffi libffi-dev musl-dev openssl openssl-dev curl && \
+RUN apt update && apt install gcc py3-cffi libffi-dev musl-dev openssl openssl-dev curl && \
     pip install -r requirements.txt && \
     apt remove gcc libffi-dev musl-dev openssl-dev
 
